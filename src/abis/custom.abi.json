@@ -1,0 +1,6 @@
+[
+    "function read() view returns (string memory)",
+    "function read(uint256) view returns (string memory)",
+    "function get() view returns (string memory)",
+    "function get(uint256) view returns (string memory)"
+]

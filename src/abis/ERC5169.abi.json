@@ -1,0 +1,6 @@
+[
+    "function scriptURI() view returns (string[] memory)",
+    "function scriptURI(uint256) view returns (string[] memory)",
+    "function scriptURI(string memory) view returns (string[] memory)",
+    "function scriptURI(bytes32) view returns (string[] memory)"
+]
