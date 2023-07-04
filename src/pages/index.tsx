@@ -30,20 +30,10 @@ const Home: NextPage = () => {
         <ConnectButton />
       </Box>
 
-      <ContractDecode />
-
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          padding: '1rem',
-          borderTop: '1px solid #eaeaea',
-        }}
-      >
-        <Link href="https://rainbow.me" rel="noopener noreferrer" target="_blank">
-          Made with ❤️ by your frens at 🌈
-        </Link>
+      <Box sx={{
+        height: '95vh',
+      }}>
+        <ContractDecode />
       </Box>
     </Container>
   );

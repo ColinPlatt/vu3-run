@@ -98,14 +98,13 @@ export function ContractDecode({} : ContractDecodeProps) {
                             <p>Loading...</p>
                         ) : decodedMediaData ? (
                             <div>
-                                <h2>Data:</h2>
                                 {
                                 decodedMediaData ? (
-                                    <Box sx={{ width: '100%', height: '95vh', overflow: 'hidden' }}>
+                                    <Box sx={{ height: '95vh', overflow: 'hidden' }}>
                                         <iframe 
                                             src={decodedMediaData}
-                                            height="100%"
-                                            width="100%"
+                                            height="90%"
+                                            width="90%"
                                         />
                                     </Box>
                                 ) : null
