@@ -13,6 +13,7 @@ export function ContractDecode({} : ContractDecodeProps) {
         fetchEncodedData,
         decodedData, 
         decodedMediaData, 
+        provider,
         loading, 
         error
     } = useContractDecode(ZERO_ADDRESS, '');
@@ -88,35 +89,38 @@ export function ContractDecode({} : ContractDecodeProps) {
                     Retrieve
                 </Button>
             </Box>
-
             {
-            loading === null ? (
-                <p>Enter an address and function to retrieve data.</p>
-            ) :
-                loading ? (
-                    <p>Loading...</p>
-                ) : decodedMediaData ? (
-                    <div>
-                        <h2>Data:</h2>
-                        {
-                        decodedMediaData ? (
-                            <Box sx={{ width: '100%', height: '95vh', overflow: 'hidden' }}>
-                                <iframe 
-                                    src={decodedMediaData}
-                                    height="100%"
-                                    width="100%"
-                                />
-                            </Box>
-                        ) : null
-                        }
-                        {
-                        error ? (
-                            <p>{error}</p>
-                        ) : null
-                        }
-                    </div>
+                provider ? (
+                    loading === null ? (
+                        <p>Enter an address and function to retrieve data.</p>
+                    ) :
+                        loading ? (
+                            <p>Loading...</p>
+                        ) : decodedMediaData ? (
+                            <div>
+                                <h2>Data:</h2>
+                                {
+                                decodedMediaData ? (
+                                    <Box sx={{ width: '100%', height: '95vh', overflow: 'hidden' }}>
+                                        <iframe 
+                                            src={decodedMediaData}
+                                            height="100%"
+                                            width="100%"
+                                        />
+                                    </Box>
+                                ) : null
+                                }
+                                {
+                                error ? (
+                                    <p>{error}</p>
+                                ) : null
+                                }
+                            </div>
+                        ) : (
+                            <p>No data could be retrieved for the given address and ID.</p>
+                        )
                 ) : (
-                    <p>No data could be retrieved for the given address and ID.</p>
+                    <p>Connect your wallet to retrieve data.</p>
                 )
         } </Box>
     );

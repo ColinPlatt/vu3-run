@@ -124,6 +124,7 @@ export function useContractDecode<T>(
         fetchEncodedData,
         decodedData, 
         decodedMediaData, 
+        provider,
         loading, 
         error
     };
