@@ -11,8 +11,6 @@ import {Address, isAddress} from "viem"
 const Nav: NextPage = () => {
   const router = useRouter()
   const { address, functionName, id } = router.query
-
-  console.log(router.query)
   return (
     <Container>
       <Head>

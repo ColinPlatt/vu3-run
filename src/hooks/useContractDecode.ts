@@ -11,7 +11,7 @@ export function useContractDecode<T>(
     id?: BigInt | string, 
     args?: any[]
 ) {
-    const { provider } = useAuth(); 
+    const { provider, chain } = useAuth(); 
     const [ decodedData, setDecodedData ] = useState<string>();
     const [ decodedMediaData, setDecodedMediaData ] = useState<string>();
     const [ loading, setLoading ] = useState<boolean | null>(null);
@@ -20,8 +20,6 @@ export function useContractDecode<T>(
     const fetchEncodedData = async (address: Address, functionName: string, id?: BigInt | string) => {
         setLoading(true);
         setDecodedData(undefined);  // reset the tokenURI
-    
-        console.log("useContractDecode", address, functionName, id?.toString());
 
         if (!provider) {
             setDecodedData(undefined);
@@ -67,6 +65,7 @@ export function useContractDecode<T>(
         }
 
         try {
+            console.log("useContractDecode", provider);
             const data = await provider.readContract({
                 address: address,
                 abi: fnAbi, 
@@ -94,6 +93,8 @@ export function useContractDecode<T>(
                 const json = JSON.parse(decoded);
                 let imageData;
         
+                console.log("useContractDecode", json);
+
                 if (json.animation_url) {
                     imageData = json.animation_url;
                 } else if (json.image_data) {
@@ -105,7 +106,8 @@ export function useContractDecode<T>(
                 if (imageData) {
                     if (imageData.startsWith('data:image/svg+xml;base64,')
                         || imageData.startsWith('data:image/png;base64,')
-                        || imageData.startsWith('data:text/html;base64,')) {
+                        || imageData.startsWith('data:text/html;base64,')
+                        || imageData.startsWith('data:audio/wav;base64,')) {
                             setDecodedMediaData(imageData);
                             setError(undefined);
                     } else {
