@@ -8,7 +8,7 @@ import atob from 'atob';
 export function useContractDecode<T>(
     address: Address, 
     functionName: string,
-    id?: BigInt, 
+    id?: BigInt | string, 
     args?: any[]
 ) {
     const { provider } = useAuth(); 
@@ -17,7 +17,7 @@ export function useContractDecode<T>(
     const [ loading, setLoading ] = useState<boolean | null>(null);
     const [ error, setError] = useState<string>();
 
-    const fetchEncodedData = async (address: Address, functionName: string, id?: BigInt) => {
+    const fetchEncodedData = async (address: Address, functionName: string, id?: BigInt | string) => {
         setLoading(true);
         setDecodedData(undefined);  // reset the tokenURI
     
