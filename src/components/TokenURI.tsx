@@ -1,10 +1,3 @@
-/*
-interface TokenURIProps {
-  address?: Address;
-  id?: BigInt;
-}
-*/
-
 import {useState} from 'react';
 import {useTokenURI} from '../hooks';
 import {Address, isAddress} from "viem"
@@ -22,7 +15,9 @@ export function TokenURI({} : TokenURIProps) {
         setId,
         tokenURI,
         fetchTokenURI,
-        loading
+        loading,
+        decodedData,
+        error
     } = useTokenURI(ZERO_ADDRESS, BigInt(0));
 
     const [inputAddress, setInputAddress] = useState < Address | string > ('');
@@ -61,6 +56,20 @@ export function TokenURI({} : TokenURIProps) {
                 <div>
                     <h2>Token URI:</h2>
                     <p>{tokenURI}</p>
+                    {
+                    decodedData ? (
+                        <iframe 
+                            src={decodedData}
+                            height="100%"
+                            width="100%"
+                        />
+                    ) : null
+                    }
+                    {
+                    error ? (
+                        <p>{error}</p>
+                    ) : null
+                    }
                 </div>
             ) : (
                 <p>No data could be retrieved for the given address and ID.</p>

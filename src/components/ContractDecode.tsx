@@ -1,0 +1,123 @@
+import {useState} from 'react';
+import {useContractDecode} from '../hooks';
+import {Address, isAddress} from "viem"
+import {Button, Box, Input, Heading, Select} from 'theme-ui';
+
+interface ContractDecodeProps {}
+
+const ZERO_ADDRESS: Address = '0x0000000000000000000000000000000000000000';
+
+
+export function ContractDecode({} : ContractDecodeProps) {
+    const {
+        fetchEncodedData,
+        decodedData, 
+        decodedMediaData, 
+        loading, 
+        error
+    } = useContractDecode(ZERO_ADDRESS, '');
+
+    const [inputAddress, setInputAddress] = useState < Address | string > ('');
+    const [inputFn, setInputFn] = useState < string > ('');
+    const [inputId, setInputId] = useState < BigInt | string > ('');
+    const [inputArgs, setInputArgs] = useState < any[] > ([]);
+
+    const update = () => {
+        if (isAddress(inputAddress as Address) && typeof inputFn === 'string') {
+            fetchEncodedData(inputAddress as Address, inputFn, BigInt(inputId.toString()));
+        } 
+    }
+
+    return (
+        <Box sx={{
+            height: '85vh',
+        }}>
+            <Box
+                sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    padding: '1rem',
+                    borderTop: '1px solid #eaeaea',
+                }}
+            >
+                <Input 
+                    type="text"
+                    value={inputAddress}
+                    onChange={(e) => setInputAddress(e.target.value)}
+                    placeholder="Enter address"
+                    sx={{ 
+                        width: ['30%', '30%', '30%', '30%'],
+                        margin: '1rem',
+                        backgroundColor: '#eaeaea'
+                    }}
+                />
+                <Select 
+                    onChange={(e) => setInputFn(e.target.value)}
+                    sx={{ 
+                        width: ['125%', '125%', '125%', '125%'],
+                        margin: '1rem',
+                        backgroundColor: '#eaeaea'
+                     }}
+                >
+                    <option value="">Select function</option>
+                    <option value="uri">uri</option>
+                    <option value="tokenURI">tokenURI</option>
+                    <option value="scriptURI">scriptURI</option>
+                    <option value="read">read</option>
+                    <option value="get">get</option>
+                </Select>
+                <Input 
+                    type="text"
+                    value={inputId.toString()}
+                    onChange={(e) => setInputId(e.target.value)}
+                    placeholder="Enter ID"
+                    sx={{ 
+                        width: ['10%', '10%', '10%', '10%'],
+                        margin: '1rem',
+                        backgroundColor: '#eaeaea'
+                    }}
+                />
+                <Button 
+                    onClick={update}
+                    sx={{ 
+                        marginLeft: '1rem',
+                        color: '#000000',
+                    }} 
+                >
+                    Retrieve
+                </Button>
+            </Box>
+
+            {
+            loading === null ? (
+                <p>Enter an address and function to retrieve data.</p>
+            ) :
+                loading ? (
+                    <p>Loading...</p>
+                ) : decodedMediaData ? (
+                    <div>
+                        <h2>Data:</h2>
+                        {
+                        decodedMediaData ? (
+                            <Box sx={{ width: '100%', height: '95vh', overflow: 'hidden' }}>
+                                <iframe 
+                                    src={decodedMediaData}
+                                    height="100%"
+                                    width="100%"
+                                />
+                            </Box>
+                        ) : null
+                        }
+                        {
+                        error ? (
+                            <p>{error}</p>
+                        ) : null
+                        }
+                    </div>
+                ) : (
+                    <p>No data could be retrieved for the given address and ID.</p>
+                )
+        } </Box>
+    );
+}

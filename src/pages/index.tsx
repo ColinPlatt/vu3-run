@@ -4,7 +4,7 @@ import Image from 'next/image'
 import Head from 'next/head';
 import { Text, Container, Grid, Button, Box, Link  } from 'theme-ui';
 import { theme } from '../theme';
-import {TokenURI} from '../components';
+import {ContractDecode} from '../components';
 
 const Home: NextPage = () => {
   return (
@@ -30,15 +30,7 @@ const Home: NextPage = () => {
         <ConnectButton />
       </Box>
 
-      <TokenURI />
-      <Box sx={{ width: '100%', height: '95vh', overflow: 'hidden' }}>
-        <iframe
-          src="https://example.com"
-          width="100%"
-          height="100%"
-          style={{ border: 'none' }}
-        />
-      </Box>
+      <ContractDecode />
 
       <Box
         sx={{

@@ -883,6 +883,11 @@
     "@theme-ui/core" "^0.15.7"
     "@theme-ui/css" "^0.15.7"
 
+"@types/atob@^2.1.2":
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/@types/atob/-/atob-2.1.2.tgz#157eb0cc46264a8c55f2273a836c7a1a644fb820"
+  integrity sha512-8GAYQ1jDRUQkSpHzJUqXwAkYFOxuWAOGLhIR4aPd/Y/yL12Q/9m7LsKpHKlfKdNE/362Hc9wPI1Yh6opDfxVJg==
+
 "@types/connect@^3.4.33":
   version "3.4.35"
   resolved "https://registry.yarnpkg.com/@types/connect/-/connect-3.4.35.tgz#5fcf6ae445e4021d1fc2219a4873cc73a3bb2ad1"
@@ -1621,6 +1626,11 @@ async-mutex@^0.2.6:
   integrity sha512-Hs4R+4SPgamu6rSGW8C7cV9gaWUKEHykfzCCvIRuaVv636Ju10ZdeUbvb4TBEW0INuq2DHZqXbK4Nd3yG4RaRw==
   dependencies:
     tslib "^2.0.0"
+
+atob@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/atob/-/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
+  integrity sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==
 
 atomic-sleep@^1.0.0:
   version "1.0.0"
