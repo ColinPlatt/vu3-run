@@ -106,14 +106,26 @@ export function ContractDecode({} : ContractDecodeProps) {
                                                 marginLeft: '1rem',
                                                 color: '#000000',
                                             }} 
-                                            onClick={() => {
-
-                                                const decoded = window.atob(decodedMediaData.split(',')[1]);
-                                                const win = window.open("", "_parent");
-
-                                                if (win) {
-                                                    win.document.write(decoded);
-                                                };
+                                            onClick={async () => {
+                                                const uniqueKey = `${inputAddress}-${inputFn}-${inputId}`;
+                                                
+                                                const base64Data = decodedMediaData.split(',')[1];
+                                                const decodedData = decodeURIComponent(escape(window.atob(base64Data)));
+                                                const response = await fetch(`/api/store/${inputAddress}/${inputFn}/${inputId}`, {
+                                                    method: 'POST',
+                                                    headers: {
+                                                        'Content-Type': 'application/json',
+                                                    },
+                                                    body: JSON.stringify({ data: decodedData }),
+                                                });
+                                                
+                                                const { id } = await response.json();
+                                                if (id === uniqueKey) {
+                                                    const win = window.open(`/api/data/${inputAddress}/${inputFn}/${inputId}`, "_blank");
+                                                    win?.focus();
+                                                } else {
+                                                    console.error("An error occurred while storing the data.");
+                                                }
                                             }}
                                         >
                                             Open original asset
