@@ -5,7 +5,7 @@ import { useAuth } from "./useAuth"
 import atob from 'atob';
 
 
-export function useContractDecode<T>(
+export function useContractDecode_Routed<T>(
     address: Address, 
     functionName: string,
     id?: BigInt | string, 
@@ -80,12 +80,13 @@ export function useContractDecode<T>(
             setLoading(false);
         }
     }
-    
+
     useEffect(() => {
-        if (provider) {
+        if(provider && address && functionName) {
             setProviderReady(true); 
+            fetchEncodedData(address, functionName, id);
         }
-    }, [provider]);
+    }, [provider, address, functionName, id]);
 
     useEffect(() => {
         if (decodedData && typeof decodedData === 'string') {
