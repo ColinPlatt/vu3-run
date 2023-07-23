@@ -13,6 +13,7 @@ export function useClient() {
 	const [client, setClient] = useState<PublicClient | undefined>();
 	const [error, setError] = useState<string>();
 
+	
     useEffect(() => {
         if(chain) {
 
