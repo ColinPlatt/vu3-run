@@ -13,6 +13,7 @@ import {
 import {
     arbitrum,
     arbitrumGoerli,
+    lineaTestnet,
     goerli,
     mainnet,
     optimism,
@@ -34,7 +35,8 @@ const {chains, publicClient, webSocketPublicClient} = configureChains([
         sepolia,
         arbitrumGoerli,
         polygonMumbai,
-        optimismGoerli
+        optimismGoerli,
+        lineaTestnet
     ] : []),
 ], [publicProvider()]);
 
